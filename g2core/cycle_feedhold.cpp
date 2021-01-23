@@ -31,7 +31,6 @@
 #include "gcode.h"      // #3
 #include "canonical_machine.h"
 #include "planner.h"
-#include "plan_arc.h"
 #include "stepper.h"
 #include "spindle.h"
 #include "coolant.h"
@@ -409,7 +408,6 @@ static void _start_queue_flush()
 
 static stat_t _run_queue_flush()            // typically runs from cm1 planner
 {
-    cm_abort_arc(cm);                       // kill arcs so they don't just create more alines
     planner_reset((mpPlanner_t *)cm->mp);   // reset primary planner. also resets the mr under the planner
     cm_reset_position_to_absolute_position(cm);
     cm1.queue_flush_state = QUEUE_FLUSH_OFF;

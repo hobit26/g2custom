@@ -261,7 +261,6 @@ typedef struct cmMachine {                  // struct to manage canonical machin
 
     // System group settings
     float junction_integration_time;        // how aggressively will the machine corner? 1.6 or so is about the upper limit
-    float chordal_tolerance;                // arc chordal accuracy setting in mm
     float feedhold_z_lift;                  // mm to move Z axis on feedhold, or 0 to disable
     bool soft_limit_enable;                 // true to enable soft limit testing on Gcode inputs
     bool limit_enable;                      // true to enable limit switches (disabled is same as override)
@@ -448,13 +447,6 @@ stat_t cm_set_path_control(GCodeState_t *gcode_state, const uint8_t mode);  // G
 // Machining Functions (4.3.6)
 stat_t cm_straight_feed(const float *target, const bool *flags, const uint8_t motion_profile); //G1
 stat_t cm_dwell(const float seconds);                                       // G4, P parameter
-
-stat_t cm_arc_feed(const float target[], const bool target_f[],             // G2/G3 - target endpoint
-                   const float offset[], const bool offset_f[],             // IJK offsets
-                   const float radius, const bool radius_f,                 // radius if radius mode
-                   const float P_word, const bool P_word_f,                 // parameter
-                   const bool modal_g1_f,                                   // modal group flag for motion group
-                   const cmMotionMode motion_mode);                         // defined motion mode
 
 // Spindle Functions (4.3.7)
 // see spindle.h for spindle functions - which would go right here

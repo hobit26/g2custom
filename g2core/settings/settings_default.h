@@ -62,10 +62,6 @@
 #define JUNCTION_INTEGRATION_TIME   0.75    // {jt: cornering - between 0.05 and 2.00 (max)
 #endif
 
-#ifndef CHORDAL_TOLERANCE
-#define CHORDAL_TOLERANCE           0.01    // {ct: chordal tolerance for arcs (in mm)
-#endif
-
 #ifndef MOTOR_POWER_TIMEOUT
 #define MOTOR_POWER_TIMEOUT         2.00    // {mt:  motor power timeout in seconds
 #endif

@@ -35,7 +35,6 @@
 #include "text_parser.h"
 #include "settings.h"
 #include "planner.h"
-#include "plan_arc.h"
 #include "stepper.h"
 #include "gpio.h"
 #include "spindle.h"
@@ -727,7 +726,6 @@ const cfgItem_t cfgArray[] = {
 
     // General system parameters
     { "sys","jt",  _fipn, 2, cm_print_jt,  cm_get_jt,  cm_set_jt,  nullptr, JUNCTION_INTEGRATION_TIME },
-    { "sys","ct",  _fipnc,4, cm_print_ct,  cm_get_ct,  cm_set_ct,  nullptr, CHORDAL_TOLERANCE },
     { "sys","zl",  _fipnc,3, cm_print_zl,  cm_get_zl,  cm_set_zl,  nullptr, FEEDHOLD_Z_LIFT },
     { "sys","sl",  _bipn, 0, cm_print_sl,  cm_get_sl,  cm_set_sl,  nullptr, SOFT_LIMIT_ENABLE },
     { "sys","lim", _bipn, 0, cm_print_lim, cm_get_lim, cm_set_lim, nullptr, HARD_LIMIT_ENABLE },

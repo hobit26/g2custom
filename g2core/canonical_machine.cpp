@@ -96,7 +96,6 @@
 #include "text_parser.h"
 #include "settings.h"
 
-#include "plan_arc.h"
 #include "planner.h"
 #include "stepper.h"
 #include "encoder.h"
@@ -159,7 +158,6 @@ void canonical_machine_init(cmMachine_t *_cm, void *_mp)
     memset(&_cm->gm, 0, sizeof(GCodeState_t));      // clear all values, pointers and status
 
     canonical_machine_init_assertions(_cm);         // establish assertions
-    cm_arc_init(_cm);                               // setup arcs. Note: spindle and coolant inits are independent
     _cm->mp = _mp;                                  // point to associated planner
     _cm->am = MODEL;                                // setup initial Gcode model pointer
 }
@@ -1274,12 +1272,7 @@ stat_t cm_set_path_control(GCodeState_t *gcode_state, const uint8_t mode)
 
 /****************************************************************************************
  **** Machining Functions (4.3.6) *******************************************************
- ****************************************************************************************/
-/*
- * cm_arc_feed() - SEE plan_arc.cpp
- */
-
-/****************************************************************************************
+ ****************************************************************************************
  * cm_dwell() - G4, P parameter (seconds)
  */
 stat_t cm_dwell(const float seconds)
@@ -2255,8 +2248,6 @@ stat_t cm_set_zb(nvObj_t *nv) { return (set_float(nv, cm->a[_axis(nv)].zero_back
 /*
  * cm_get_jt()  - get junction integration time
  * cm_set_jt()  - set junction integration time
- * cm_get_ct()  - get chordal tolerance
- * cm_set_ct()  - set chordal tolerance
  * cm_get_sl()  - get soft limit enable
  * cm_set_sl()  - set soft limit enable
  * cm_get_lim() - get hard limit enable
@@ -2276,9 +2267,6 @@ stat_t cm_set_jt(nvObj_t *nv)
     }
     return(STAT_OK);
 }
-
-stat_t cm_get_ct(nvObj_t *nv) { return(get_float(nv, cm->chordal_tolerance)); }
-stat_t cm_set_ct(nvObj_t *nv) { return(set_float_range(nv, cm->chordal_tolerance, CHORDAL_TOLERANCE_MIN, 10000000)); }
 
 stat_t cm_get_zl(nvObj_t *nv) { return(get_float(nv, cm->feedhold_z_lift)); }
 stat_t cm_set_zl(nvObj_t *nv) { return(set_float(nv, cm->feedhold_z_lift)); }

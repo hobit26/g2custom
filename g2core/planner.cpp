@@ -54,7 +54,6 @@
 #include "g2core.h"
 #include "config.h"
 #include "canonical_machine.h"
-#include "plan_arc.h"
 #include "planner.h"
 #include "kinematics.h"
 #include "stepper.h"

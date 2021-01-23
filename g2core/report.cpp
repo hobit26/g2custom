@@ -515,17 +515,6 @@ void qr_request_queue_report(int8_t buffers)
         qr.buffers_removed -= buffers;
     }
 
-    // time-throttle requests while generating arcs
-//    qr.motion_mode = cm_get_motion_mode(ACTIVE_MODEL);
-    qr.motion_mode = cm_get_motion_mode((GCodeState_t *)&(cm->gm));
-    if ((qr.motion_mode == MOTION_MODE_CW_ARC) || (qr.motion_mode == MOTION_MODE_CCW_ARC)) {
-        uint32_t tick = SysTickTimer_getValue();
-        if (tick - qr.init_tick < MIN_ARC_QR_INTERVAL) {
-            qr.queue_report_requested = false;
-            return;
-        }
-    }
-
     // either return or request a report
     if (qr.queue_report_verbosity != QR_OFF) {
         qr.queue_report_requested = true;
